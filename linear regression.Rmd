@@ -1,5 +1,5 @@
 ---
-title: "linear model"
+title: "linear model (1 out of 3"
 output: github_document
 ---
 
@@ -97,5 +97,48 @@ fit = lm(price ~ stars + borough, data = nyc_airbnb)
 
 broom::tidy(fit)
 broom::glance(fit)
+```
+
+
+
+## Diagnositics
+
+```{r}
+# residuals based on my model fit 
+nyc_airbnb %>% 
+  modelr::add_residuals(nyc_airbnb, fit) %>%
+  ggplot(aes(x = borough, y = resid)) +
+  geom_violin() +
+  ylim(-500, 1500)
+
+nyc_airbnb %>%
+  modelr::add_residuals(fit) %>%
+  ggplot(aes(x = stars, y = resid)) +
+  geom_point() +
+  facet_wrap(. ~borough)
+
+# the plot above shows the distribution of the residual in each of the borough 
+```
+
+
+
+## Hypothesis Test
+
+
+This does t-test by default 
+```{r}
+fit %>%
+  broom::tidy()
+```
+
+
+What about the significance of 'borough' 
+
+```{r}
+fit_null = lm(price ~ stars, data = nyc_airbnb)
+fit_alt = lm(price ~ stars + borough, data = nyc_airbnb)
+
+anova(fit_null, fit_alt) %>%
+  broom::tidy()
 ```
 
