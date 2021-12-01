@@ -205,4 +205,4 @@ nyc_airbnb %>%
   facet_wrap(. ~ term) + 
   theme(axis.text.x = element_text(angle = 70, vjust = 0.5, hjust = 1))
 ```
-# Comparing entire room to Among private rooms leep stars fixed, it shows how much it will save 
+
