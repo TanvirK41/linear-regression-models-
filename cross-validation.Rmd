@@ -90,8 +90,13 @@ train_df %>%
 ```
 
 
-## Look at prediction accuracy
+## Look at prediction accuracy - can we compute the root mean square for the model looking not at the root mean sqaure mean for this dataset but how well its going about in making prediction on an unobserved data set. Root Mean Square in testing dataset
 ```{r}
-
+# missing patterns 
+rmse(linear_mod, test_df)
+# best choice - best predictions 
+rmse(smooth_mod, test_df)
+# chasing things that are noise and not real things 
+rmse(wiggly_mod, test_df)
 ```
 
